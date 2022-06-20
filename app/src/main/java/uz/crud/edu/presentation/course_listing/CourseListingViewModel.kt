@@ -3,11 +3,9 @@ package uz.crud.edu.presentation.course_listing
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.crud.edu.domain.model.EduCenter
 import uz.crud.edu.domain.repository.CourseRepository
@@ -15,7 +13,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CourseListingViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
     private val repository: CourseRepository
 ) : ViewModel() {
 
