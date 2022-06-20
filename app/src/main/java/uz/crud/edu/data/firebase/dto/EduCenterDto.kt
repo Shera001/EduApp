@@ -1,6 +1,6 @@
-package uz.crud.edu.domain.model
+package uz.crud.edu.data.firebase.dto
 
-class EduCenterListing {
+class EduCenterDto {
 
     var id: Int? = null
     var name: String? = null
@@ -10,6 +10,7 @@ class EduCenterListing {
     var info: String? = null
     var link: String? = null
 
+    constructor()
     constructor(
         id: Int?,
         name: String?,
@@ -27,6 +28,4 @@ class EduCenterListing {
         this.info = info
         this.link = link
     }
-
-    constructor()
 }

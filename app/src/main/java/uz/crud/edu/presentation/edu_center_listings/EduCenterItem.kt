@@ -15,11 +15,11 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import uz.crud.edu.R
-import uz.crud.edu.domain.model.EduCenterListing
+import uz.crud.edu.domain.model.EduCenter
 
 @Composable
 fun EduCenterItem(
-    eduCenter: EduCenterListing,
+    eduCenter: EduCenter,
     modifier: Modifier
 ) {
     Row(
@@ -50,7 +50,29 @@ fun EduCenterItem(
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = eduCenter.number ?: "",
+                text = eduCenter.number.toString(),
+                fontWeight = FontWeight.Light,
+                fontSize = 16.sp,
+                color = MaterialTheme.colors.onBackground
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = eduCenter.address.toString(),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 16.sp,
+                color = MaterialTheme.colors.onBackground,
+                maxLines = 1
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = eduCenter.link.toString(),
+                fontWeight = FontWeight.Light,
+                fontSize = 16.sp,
+                color = MaterialTheme.colors.onBackground
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = eduCenter.info.toString(),
                 fontWeight = FontWeight.Light,
                 fontSize = 16.sp,
                 color = MaterialTheme.colors.onBackground
