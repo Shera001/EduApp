@@ -1,8 +1,8 @@
 package uz.crud.edu.presentation.edu_center_listings
 
-import uz.crud.edu.domain.model.EduCenterListing
+import uz.crud.edu.domain.model.EduCenter
 
 data class EduCenterListingState(
-    val eduCenters: List<EduCenterListing> = emptyList(),
+    val eduCenters: List<EduCenter> = emptyList(),
     val isLoading: Boolean = false
 )
