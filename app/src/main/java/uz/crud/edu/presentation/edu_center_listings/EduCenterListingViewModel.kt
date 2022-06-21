@@ -31,4 +31,17 @@ class EduCenterListingViewModel @Inject constructor(
                 }
         }
     }
+
+    fun searchEduCenter(event: EduCenterListingsEvent) {
+        if (event is EduCenterListingsEvent.OnSearchQueryChange) {
+            viewModelScope.launch {
+                state = state.copy(searchQuery = event.query)
+                repository
+                    .searchEduCenter(event.query)
+                    .collect { listings: List<EduCenter> ->
+                        state = state.copy(eduCenters = listings)
+                    }
+            }
+        }
+    }
 }

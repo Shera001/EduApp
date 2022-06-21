@@ -12,4 +12,7 @@ class EduCenterRepositoryImpl @Inject constructor(
 
     override suspend fun getEduCenterListing(): Flow<List<EduCenter>> =
         dataSource.getEduCenters()
+
+    override suspend fun searchEduCenter(query: String): Flow<List<EduCenter>> =
+        dataSource.searchEduCenter(query)
 }

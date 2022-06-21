@@ -6,4 +6,6 @@ import uz.crud.edu.domain.model.EduCenter
 interface EduCenterRepository {
 
     suspend fun getEduCenterListing(): Flow<List<EduCenter>>
+
+    suspend fun searchEduCenter(query: String): Flow<List<EduCenter>>
 }

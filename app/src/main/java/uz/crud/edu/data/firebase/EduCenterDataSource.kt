@@ -16,7 +16,6 @@ import javax.inject.Inject
 class EduCenterDataSource @Inject constructor() {
 
     suspend fun getEduCenters(): Flow<List<EduCenter>> = callbackFlow {
-        Log.e("TAG", "getEduCenters: ")
         val databaseReference = FirebaseDatabase.getInstance().getReference("educenter")
         val list = ArrayList<EduCenter>()
         databaseReference.addValueEventListener(object : ValueEventListener {
@@ -33,6 +32,31 @@ class EduCenterDataSource @Inject constructor() {
                 close(error.toException())
             }
         })
+
+        awaitClose { databaseReference }
+    }
+
+    suspend fun searchEduCenter(query: String): Flow<List<EduCenter>> = callbackFlow {
+        val databaseReference = FirebaseDatabase.getInstance().getReference("educenter")
+        val list = ArrayList<EduCenter>()
+        databaseReference
+            .orderByChild("name")
+            .startAt(query)
+            .endAt("$query\uf8ff")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    list.clear()
+                    snapshot.children.forEach { child: DataSnapshot ->
+                        val eduCenterDto: EduCenterDto? = child.getValue(EduCenterDto::class.java)
+                        eduCenterDto?.toEduCenter()?.let { list.add(it) }
+                    }
+                    this@callbackFlow.trySend(list).isSuccess
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    close(error.toException())
+                }
+            })
 
         awaitClose { databaseReference }
     }
